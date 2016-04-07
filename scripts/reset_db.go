@@ -2,7 +2,7 @@ package main
 
 import (
   "fmt"
-  "github.com/eecs394-s16/brown-api-golang/models"
+  "github.com/YaminLi/Jukebox_test/models"
   _ "github.com/jinzhu/gorm/dialects/postgres"
 )
 
