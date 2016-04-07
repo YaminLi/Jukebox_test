@@ -6,7 +6,9 @@ import (
 
 type Song struct {
   gorm.Model
+  Id     string `json:"Id"     `
   Title  string `json:"title"  `
   Artist string `json:"artist" `
   Album  string `json:"album"  `
+  Votes  int    `json:"score"  `
 }
