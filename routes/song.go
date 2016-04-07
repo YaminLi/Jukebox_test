@@ -43,20 +43,8 @@ func createSongHandler(w http.ResponseWriter, req *http.Request) {
     return
   }
 
-  //Initialize Id
-  go func ()  {
-    var i uint64
-    for i = 0;  ; i++ {
-        idAssignmentChan <- strconv.FormatUint(i, 10)
-    }
-  }()
-
-  song_id := <- idAssignmentChan
-  song.Id = song_id
-
   // Initialize votes value
   song.Votes = 1
-
 
   // Save song
   models.DB.Create(&song)
@@ -71,21 +59,21 @@ func deleteSongHandler(w http.ResponseWriter, req *http.Request) {
   fmt.Println(song_id)
 
   // Get song by id
-  var songs []models.Song
-  models.DB.Find(&songs)
-  var song Song
-  for elem := range songs{
-    if elem.id == song_id{
-        song = elem
-        break
-    }
-  }
-
-  // Delete song
-  models.DB.Delete(&song)   //????????????
-
-  // Return response
-  json.NewEncoder(w).Encode(&song)
+  // var songs []models.Song
+  // models.DB.Find(&songs)
+  // var song Song
+  // for elem := range songs{
+  //   if elem.id == song_id{
+  //       song = elem
+  //       break
+  //   }
+  // }
+  //
+  // // Delete song
+  // models.DB.Delete(&song)   //????????????
+  //
+  // // Return response
+  // json.NewEncoder(w).Encode(&song)
 }
 
 // TODO
@@ -93,24 +81,24 @@ func upvoteSongHandler(w http.ResponseWriter, req *http.Request) {
   song_id := mux.Vars(req)["song_id"]
   fmt.Println(song_id)
 
-  // Get song by id specified
-  var songs []models.Song
-  models.DB.Find(&songs)
-  var song Song
-  for elem := range songs{
-    if elem.id == song_id{
-        song = elem
-        break
-    }
-  }
-
-  // +1 to score
-  song.Votes += 1
-
-  // Save song
-  models.DB.Save(&song)
-  // models.DB.Update(&song) //?????????
-
-  // Return song in response
-  json.NewEncoder(w).Encode(&song)
+  // // Get song by id specified
+  // var songs []models.Song
+  // models.DB.Find(&songs)
+  // var song Song
+  // for elem := range songs{
+  //   if elem.id == song_id{
+  //       song = elem
+  //       break
+  //   }
+  // }
+  //
+  // // +1 to score
+  // song.Votes += 1
+  //
+  // // Save song
+  // models.DB.Save(&song)
+  // // models.DB.Update(&song) //?????????
+  //
+  // // Return song in response
+  // json.NewEncoder(w).Encode(&song)
 }
