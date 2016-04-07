@@ -1,7 +1,7 @@
 package main
 
 import (
-  "github.com/eecs394-s16/brown-api-golang/routes"
+  "github.com/YaminLi/Jukebox_test/routes"
 )
 
 func main() {
